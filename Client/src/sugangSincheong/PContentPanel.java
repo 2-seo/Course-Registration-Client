@@ -72,10 +72,10 @@ public class PContentPanel extends JPanel {
 	}
 	
 
-//	public void save() {
-//		this.pMiridamgi.save(this.vUser.getStuNum().toString(), "basket");
-//		this.pSincheong.save(this.vUser.getStuNum().toString(), "sincheong");
-//	}
+	public void saveTextFile() {
+		this.pMiridamgi.saveTextFile(vUser.getStuNum()+EConfiguration.miridmagiFilePostfix.getText());
+		this.pSincheong.saveTextFile(vUser.getStuNum()+EConfiguration.sincheongFilePostfix.getText());
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// Table event handling 

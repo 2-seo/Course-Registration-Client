@@ -1,7 +1,5 @@
 package constants;
 
-import java.util.Vector;
-
 public class Constants {
 	
 	public enum EConfiguration{

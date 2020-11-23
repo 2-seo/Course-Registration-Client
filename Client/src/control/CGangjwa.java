@@ -4,8 +4,8 @@ import java.util.Vector;
 
 import model.DataAccessObject;
 import model.MGangjwa;
+import model.MModel;
 import valueObject.VGangjwa;
-import valueObject.VUser;
 
 public class CGangjwa {
 	 
@@ -15,13 +15,17 @@ public class CGangjwa {
  	
  	public Vector<VGangjwa> getData(String fileName){
  		DataAccessObject dataAccessObject = DataAccessObject.getInstance();
- 		Vector<MGangjwa> mGangjwas = dataAccessObject.getGangjwas(fileName);
+ 		String type = "getGangjwas";
+ 		String message = fileName;
+ 		Vector<MModel> mModels = dataAccessObject.getModels(type, message, MGangjwa.class);
  		
  		Vector<VGangjwa> vGangjwas = new Vector<VGangjwa>();
- 		for(MGangjwa mGangjwa : mGangjwas) {
- 			VGangjwa vGangjwa = new VGangjwa();
- 			vGangjwa.initialize(mGangjwa.getId(),mGangjwa.getName(),mGangjwa.getLecturer(),
- 					mGangjwa.getCredit(), mGangjwa.getTime(), mGangjwa.getMajorId());
+ 		for(MModel mModel : mModels) {
+ 			MGangjwa mGangjwa = (MGangjwa) mModel;
+ 			VGangjwa vGangjwa = new VGangjwa(
+ 					mGangjwa.getId(),mGangjwa.getName(),mGangjwa.getLecturer(),
+ 					mGangjwa.getCredit(), mGangjwa.getTime() , mGangjwa.getMajorId()
+ 			); 			
  			vGangjwas.add(vGangjwa);
  		}
  		return vGangjwas;

@@ -68,7 +68,11 @@ public class NoticeTable extends JTable {
 	
 	public MNotice getSelectedNotice() {
 		int selectedRow = this.getSelectedRow();
-		return this.mNotices.get(selectedRow);
+		if(selectedRow != -1) {
+			return this.mNotices.get(selectedRow);
+		}
+		
+		return null;
 	}
 	
 }

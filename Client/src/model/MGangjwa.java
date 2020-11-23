@@ -1,16 +1,7 @@
 package model;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.Vector;
+public class MGangjwa extends MModel {
 
-import valueObject.VGangjwa;
-
-public class MGangjwa {
-	private Scanner scanner;
-	private FileWriter fileWriter;
-	
 	private String id;
 	private String name;
 	private String lecturer;
@@ -19,84 +10,56 @@ public class MGangjwa {
 	private String majorId;
 	
 		
-	public MGangjwa(Scanner scanner) {
-		this.scanner = scanner;
-	}
-
-	public MGangjwa(FileWriter fileWriter, VGangjwa vGangjwas) {
-		this.fileWriter =fileWriter;
-		this.id = vGangjwas.getId();
-		this.name = vGangjwas.getName();
-		this.lecturer = vGangjwas.getLecturer();
-		this.credit = vGangjwas.getCredit();
-		this.time = vGangjwas.getTime();
-		this.majorId = vGangjwas.getMajorId();
+	public MGangjwa() {
 		
 	}
-
+	
 	public String getId() {
 		return id;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getLecturer() {
 		return lecturer;
 	}
+
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
+	}
+
 	public String getCredit() {
 		return credit;
 	}
+
+	public void setCredit(String credit) {
+		this.credit = credit;
+	}
+
 	public String getTime() {
 		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public String getMajorId() {
 		return majorId;
 	}
-	
-	public void read() {	
-		
-		this.id = scanner.next();
-		this.name = scanner.next();
-		this.lecturer = scanner.next();
-		this.credit = scanner.next();
-		this.time = scanner.next();
-		this.majorId = scanner.next();
-	}
-	
-	public void save() {
-		try {
-			this.fileWriter.write(this.id+" ");
-			this.fileWriter.write(this.name+" ");
-			this.fileWriter.write(this.lecturer+" ");
-			this.fileWriter.write(this.credit+" ");
-			this.fileWriter.write(this.time+"\n");
-			this.fileWriter.write(this.majorId+"\n");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	public void addWrite(FileWriter fw, VGangjwa vSelectedGangjwa) {	
 
-		try {
-			fw.write(vSelectedGangjwa.getId());
-			fw.write(" ");
-			fw.write(vSelectedGangjwa.getName());
-			fw.write(" ");
-			fw.write(vSelectedGangjwa.getLecturer());
-			fw.write(" ");
-			fw.write(vSelectedGangjwa.getCredit());
-			fw.write(" ");
-			fw.write(vSelectedGangjwa.getTime());
-			fw.write(" ");
-			fw.write(vSelectedGangjwa.getMajorId());
-			fw.write(" ");
-			fw.write("\n");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void setMajorId(String majorId) {
+		this.majorId = majorId;
 	}
 	
 	@Override

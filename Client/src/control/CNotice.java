@@ -3,6 +3,7 @@ package control;
 import java.util.Vector;
 
 import model.DataAccessObject;
+import model.MModel;
 import model.MNotice;
 
 public class CNotice {
@@ -14,7 +15,18 @@ public class CNotice {
 	
 	public Vector<MNotice> getNotice() {
 		DataAccessObject dao = DataAccessObject.getInstance();
-		Vector<MNotice> mNotices = dao.getNotice();
+		
+		String type = "getNotice";
+		String message = "";
+		
+		Vector<MModel> mModels = dao.getModels(type, message, MNotice.class);
+		
+		Vector<MNotice> mNotices = new Vector<>();
+		for(MModel mModel : mModels) {
+			MNotice mNotice = (MNotice) mModel;
+			mNotices.add(mNotice);
+		}
+		
 		
 		return mNotices;
 	}

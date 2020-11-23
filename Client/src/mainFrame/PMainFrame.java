@@ -6,7 +6,6 @@ import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 import constants.Constants;
-import model.MUser;
 import sugangSincheong.PSugangSincheongPanel;
 import valueObject.VUser;
 
@@ -51,9 +50,9 @@ public class PMainFrame extends JFrame {
 		this.pMainPanel.initialize(vStudent);
 	}
 	
-//	private void save() {
-//		this.pMainPanel.save();
-//	}
+	private void saveTextFile() {
+		this.pMainPanel.saveTextFile();
+	}
 	
 	private class WindowHandler implements WindowListener{
 
@@ -61,7 +60,7 @@ public class PMainFrame extends JFrame {
 		public void windowOpened(WindowEvent e) {}
 		@Override
 		public void windowClosing(WindowEvent e) {
-//			save();
+			saveTextFile();
 		}
 		@Override
 		public void windowClosed(WindowEvent e) {}

@@ -34,8 +34,8 @@ public class PSugangSincheongPanel extends JPanel {
 		this.pFooterPanel.initialize();
 	}
 
-//	public void save() {
-//		this.pContentPanel.save();
-//		
-//	}
+	public void saveTextFile() {
+		this.pContentPanel.saveTextFile();		
+	}
+	
 }

@@ -17,10 +17,6 @@ public class VGangjwa {
 		this.majorId = majorId;
 	}
 	
-	public VGangjwa() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public void initialize(String id, String name, String lecturer, String credit, String time, String majorId) {
 		this.id = id;
 		this.name = name;

@@ -1,17 +1,15 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
 import client.UserClient;
-import valueObject.VGangjwa;
-import valueObject.VLogin;
-import valueObject.VUser;
 
 public class DataAccessObject {
 	
@@ -29,247 +27,70 @@ public class DataAccessObject {
 		}
 		return dao;
 	}
-
-	public MUser getUser(VLogin vLogin) {
-		
-		MUser mUser = null;
-		
-		String type = "login";
-		String data = client.send(type, vLogin).trim();
-		System.out.println(data);
-		if(!data.equals("")) {			
-			Scanner scanner = new Scanner(data);
-			
-			while (scanner.hasNext()) {			
-				mUser = new MUser(scanner);
-				mUser.read();
-			}
-		}
 	
-		return mUser;
-		
-	}
-	
+	public MModel getAModel(String type, String message, Class<? extends MModel> clazz) {
 
-	public Vector<MDirectory> getDirectories(String fileName, String tableName) {
-		Vector<MDirectory> mDirectories = new Vector<MDirectory>();		
-			
-		String type = "getDirectorys";
-		String data = client.send(type, fileName + " " + tableName);
-		System.out.println(data);
-		
-		Scanner scanner = new Scanner(data);
-		
-		while (scanner.hasNext()) {
-			MDirectory mDirectory = new MDirectory(scanner);
-			mDirectory.read();
-			mDirectories.add(mDirectory);
-		}
-		
-		scanner.close();
-	
-		return mDirectories;
-	}
-	
-	public Vector<MGangjwa> getGangjwas(String fileName) {
-		Vector<MGangjwa> mGangjwas = new Vector<MGangjwa>();
-
-		String type = "getGangjwas";
-		System.out.println("fileName ================ " + fileName);
-		String data = client.send(type, fileName);
-		System.out.println(data);
-		Scanner scanner = new Scanner(data);
-		
-		while (scanner.hasNext()) {
-			MGangjwa mGangjwa = new MGangjwa(scanner);
-			mGangjwa.read();
-			mGangjwas.add(mGangjwa);
-		}
-		
-		scanner.close();
-
-		return mGangjwas;
-		
-	}
-
-	public void saveResults(String fileName, String tableName, Vector<VGangjwa> vGangjwas) {
-		
-		if(vGangjwas.size() <= 0) {
-			return;
-		}
+        MModel mModel = null;		
+		String data = client.send(type, message);		
 		
 		try {
-			FileWriter fileWriter = new FileWriter(new File("userInfo/"+fileName));
-			for(VGangjwa vGangjwa : vGangjwas) {
-				MGangjwa mGangjwa = new MGangjwa(fileWriter, vGangjwa);
-				mGangjwa.save();
+			if(!data.equals("")) {			
+				StringTokenizer st = new StringTokenizer(data.trim(), "***forsplitdata***");			
+				
+				while (st.hasMoreTokens()) {
+					mModel = clazz.getConstructor().newInstance();
+					mModel.read(st);				
+				}
 			}
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
-		
-		String type = "save";
-		String data = fileName + " " + tableName;
-		for(VGangjwa vGangjwa : vGangjwas) {
-			data += " " + vGangjwa.getId();
-		}
-		client.send(type, data);
-		
-	}
+
+		return mModel;
+
+    }
 	
-	public void removeResults(String fileName, String tableName, Vector<VGangjwa> vGangjwas) {				
-		System.out.println(vGangjwas.size());
-		if(vGangjwas.size() <= 0) {
-			return;
-		}
-		
-		try {
-			FileWriter fileWriter = new FileWriter(new File("userInfo/"+fileName));
-			for(VGangjwa vGangjwa : vGangjwas) {
-				MGangjwa mGangjwa = new MGangjwa(fileWriter, vGangjwa);
-				mGangjwa.save();
-			}
-			fileWriter.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		String type = "delete";
-		String data = fileName + " " + tableName;
-		for(VGangjwa vGangjwa : vGangjwas) {
-			data += " " + vGangjwa.getId();
-		}
-		client.send(type, data);
-		
-	}
+	public Vector<MModel> getModels(String type, String message, Class<? extends MModel> clazz) {
 
-	public Vector<MGangjwa> getResults(String fileName, String tableName) {
-
-		
-		Vector<MGangjwa> mGangjwas = new Vector<MGangjwa>();
-		
-		String type = tableName;
-		String data = client.send(type, fileName);
-		
-		if(!data.equals("")) {
-			
-			Scanner scanner = new Scanner(data);
-			
-			while (scanner.hasNext()) {
-				MGangjwa mGangjwa = new MGangjwa(scanner);
-				mGangjwa.read();
-				mGangjwas.add(mGangjwa);
-			}
-			
-			scanner.close();
-		}
-		
-		return mGangjwas;
-	}
-
-	public Vector<MNotice> getNotice() {
-		
-		Vector<MNotice> mNotices = new Vector<>();
-		
-		String type = "getNotice";
-		String data = client.send(type, "");
+        Vector<MModel> mModels = new Vector<>();							
+		String data = client.send(type, message);		
 		
 		StringTokenizer st = new StringTokenizer(data.trim(), "***forsplitdata***");
-			
-		while (st.hasMoreTokens()) {
-			MNotice mNotice = new MNotice(st);
-			mNotice.read();
-			mNotices.add(mNotice);
-		}
-		
-		
-		
-		return mNotices;
-		
-	}
-
-	public void updateUser(String data) {
-		String type = "updateUser";
-		client.send(type, data);
-		
-	}
-
-	public MUser findeUser(String userInfo) {
-		MUser mUser = null;
-		
-		String type = "findUser";
-		String data = client.send(type, userInfo);
-		
-		if(!data.equals("")) {			
-			
-			Scanner scanner = new Scanner(data.trim());						
-			while (scanner.hasNext()) {			
-				mUser = new MUser(scanner);
-				mUser.read();
-			}
-		}
-	
-		return mUser;
-	}
-
-	public Vector<MInquire> getInquire(VUser vUser) {
-		String stuNum = vUser.getStuNum().toString();
-		
-		String type = "getMyInquire";
-		String data = client.send(type, stuNum);
-		System.out.println(data);
-		Vector<MInquire> mInquires = new Vector<>();
-		
-		if(!data.equals("")) {			
-			StringTokenizer st = new StringTokenizer(data.trim(), "***forsplitdata***");			
-			
+					 
+		try {
 			while (st.hasMoreTokens()) {
-				MInquire mInquire = new MInquire(st);
-				mInquire.read();
-				mInquires.add(mInquire);
-			}
+				MModel mModel = clazz.getConstructor().newInstance();
+				mModel.read(st);
+				mModels.add(mModel);
+			}		
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
+		
+		return mModels;
+        
+    }
 	
-		return mInquires;
-				
-	}
-
-	public void createInquire(String title, String contents, String stuNum) {
-		String type = "createInquire";
-		String data = title + " " + contents + " " + stuNum;
-		client.send(type, data);
-		
-	}
-
-	public void updateInquire(String title, String contents, String no) {
-		String type = "updateInquire";
-		String data = title + " " + contents + " " + no;
-		client.send(type, data.trim());
-		
-	}
-
-	public MInquireResult getInquireResult(String inquireNo) {
-		
-		
-		String type = "getAnswer";
-		String data = client.send(type, inquireNo);
-		
-		MInquireResult mInquireResult = null;
-		
-		if(!data.equals("")) {			
-			StringTokenizer st = new StringTokenizer(data.trim(), "***forsplitdata***");
-			
-			
-			while (st.hasMoreTokens()) {
-				mInquireResult = new MInquireResult(st);
-				mInquireResult.read();				
+	public void save(String fileName, Vector<MModel> mModels) {
+		File path = new File("lectureInfo/data/" + fileName);
+		try(BufferedWriter bufferWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path), "MS949"))) {
+			for(MModel mModel : mModels) {
+				mModel.save(bufferWriter);
 			}
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
+		
+	}
+
+	public void sendToServer(String type, String message) {
+		
+        client.send(type, message.trim());
+        
+    }
 	
-		return mInquireResult;
-	}	
 	
 }

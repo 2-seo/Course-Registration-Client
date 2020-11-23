@@ -56,6 +56,11 @@ String title;
 		return this.vGangjwas;
 	}
 	
+	public void saveTextFile(String fileName) {
+		CResult cResult = new CResult();
+		cResult.saveTextFile(fileName, this.vGangjwas);
+		
+	}
 
 	public void save(String fileName, String tableName, Vector<VGangjwa> vSelectedGangjwas) {
 		

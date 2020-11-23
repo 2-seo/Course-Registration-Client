@@ -4,8 +4,9 @@ public class VDirectory {
     private String name;
     private String fileName;
     
-    public VDirectory() {
-
+    public VDirectory(String name, String fileName) {
+    	this.name = name;
+    	this.fileName = fileName;
     }
 
     public void initialize(String name, String fileName) {

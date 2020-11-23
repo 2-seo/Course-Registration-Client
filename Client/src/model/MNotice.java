@@ -1,18 +1,14 @@
 package model;
 
-import java.util.StringTokenizer;
-
-public class MNotice {
+public class MNotice extends MModel {
 	
 	private String id;
 	private String title;
 	private String contents;
 	private String writer;
-	private StringTokenizer st;
-	
 
-	public MNotice(StringTokenizer st) {
-		this.st = st;
+	public MNotice() {
+		
 	}
 
 	public String getId() {
@@ -30,14 +26,5 @@ public class MNotice {
 	public String getWriter() {
 		return writer;
 	}
-	
-	public void read() {
-		this.id = this.st.nextToken();
-		this.title = this.st.nextToken();
-		this.contents = this.st.nextToken();
-		this.writer = this.st.nextToken().trim();
-	}
-
-	
-	
+		
 }

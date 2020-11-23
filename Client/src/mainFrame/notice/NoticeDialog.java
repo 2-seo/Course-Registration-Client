@@ -70,8 +70,10 @@ public class NoticeDialog extends JDialog {
 	
 	private void openViewNoticeDialog() {
 		MNotice mNotice = noticeTable.getSelectedNotice();
-		viewNoticeDialog.setText(mNotice.getTitle(), mNotice.getContents());
-		viewNoticeDialog.setVisible(true);
+		if(mNotice != null) {
+			viewNoticeDialog.setText(mNotice.getTitle(), mNotice.getContents());
+			viewNoticeDialog.setVisible(true);			
+		}
 	}
 
 	private void closeNoticeDialog() {
