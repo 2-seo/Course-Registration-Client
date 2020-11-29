@@ -27,7 +27,7 @@ public class AnswerFrame extends JFrame {
 	
 	public AnswerFrame(ActionListener buttonHandler) {
 		
-		this.setTitle("답변하기");
+		this.setTitle("답변 보기");
 		this.setSize(400, 480);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);

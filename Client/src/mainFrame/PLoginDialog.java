@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import constants.Constants.ELoginDialog;
@@ -27,7 +28,7 @@ public class PLoginDialog extends JDialog {
 	private JLabel lblId;
 	private JTextField txtId;
 	private JLabel lblPw;
-	private JTextField txtPw;
+	private JPasswordField txtPw;
 	private JButton okButton;
 	private JButton cancelButton;
 		
@@ -65,7 +66,7 @@ public class PLoginDialog extends JDialog {
 		JPanel line2 = new JPanel();
 			this.lblPw = new JLabel(ELoginDialog.passwordLabel.getText());
 			line2.add(this.lblPw);		
-			this.txtPw = new JTextField(ELoginDialog.sizePasswordText.getInt());
+			this.txtPw = new JPasswordField(ELoginDialog.sizePasswordText.getInt());
 			line2.add(this.txtPw);
 		this.add(line2);
 		JPanel line3 = new JPanel();

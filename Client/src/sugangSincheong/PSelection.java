@@ -50,6 +50,7 @@ public class PSelection extends PGangjwaContainer {
 
 	@Override
 	public void addGangjwas(Vector<VGangjwa> vSelectedGangjwas) {
+		
 		String fileName = this.pHackgwaSelection.getFileName();
 		this.pGangjwaSelection.update(fileName);
 

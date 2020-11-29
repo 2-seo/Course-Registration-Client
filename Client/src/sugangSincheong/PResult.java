@@ -64,12 +64,20 @@ String title;
 
 	public void save(String fileName, String tableName, Vector<VGangjwa> vSelectedGangjwas) {
 		
+		if(vSelectedGangjwas.size() <= 0) {
+			return;
+		}
+		
 		CResult cResult = new CResult();
 		cResult.save(fileName, tableName, vSelectedGangjwas);
 		
 	}
 	
 	public void delete(String fileName, String tableName, Vector<VGangjwa> vSelectedGangjwas) {
+		
+		if(vSelectedGangjwas.size() <= 0) {
+			return;
+		}
 		
 		CResult cResult = new CResult();
 		cResult.delete(fileName, tableName, vSelectedGangjwas);

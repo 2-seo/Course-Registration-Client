@@ -26,7 +26,7 @@ public class EditInquireFrame extends JFrame {
 	
 	public EditInquireFrame(ActionListener buttonHandler) {
 		
-		this.setTitle("문의하기");
+		this.setTitle("문의사항 수정");
 		this.setSize(400, 300);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
