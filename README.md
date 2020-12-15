@@ -21,11 +21,14 @@ University course registration client system implemented by Java, Swing
 
 ## 문의사항 화면
 <img width="712" alt="inquire" src="https://user-images.githubusercontent.com/67419004/102228429-0c292280-3f2e-11eb-9024-706611424d63.png">
-문의사항을 등록할 수 있다.  
-답변이 등록되면 "답변완료" 표시가 나타난다.  
+문의사항을 등록할 수 있다.
+
+답변이 등록되면 "답변완료" 표시가 나타난다.
+
 답변이 완료된 문의사항은 수정할 수 없다.
 
 ## 학생정보 화면
 <img width="412" alt="stuInfo" src="https://user-images.githubusercontent.com/67419004/102228528-2531d380-3f2e-11eb-9187-37fade00216a.png">
-학생정보를 수정할 수 있는 화면이다.  
-학번과 전공은 수정할 수 없다.  
+학생정보를 수정할 수 있는 화면이다.
+
+학번과 전공은 수정할 수 없다.
